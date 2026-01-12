@@ -239,7 +239,7 @@ st.title("Antibiotic Management System")
 # ---------------- MENU ----------------
 menu = st.sidebar.selectbox(
     "Select operation",
-    ["Read Antibiotics", "Create Antibiotic", "Update Antibiotic", "Delete Antibiotic", "View Charts"]
+    ["Search / Filter / Sort", "Read Antibiotics", "Create Antibiotic", "Update Antibiotic", "Delete Antibiotic", "View Charts"]
 )
 
 
@@ -340,3 +340,40 @@ elif menu == "View Charts":
     })
     st.bar_chart(df.groupby(["Class", "Spectrum"]).size().unstack(fill_value=0))
 
+elif menu == "Search / Filter / Sort":
+    st.subheader("Search, Filter, and Sort Antibiotics")
+
+    # --- Search ---
+    search_name = st.text_input("Search by Name")
+    if search_name:
+        results = [a for a in st.session_state.antibiotics if search_name.lower() in a.name.lower()]
+        if results:
+            st.write("**Search Results:**")
+            for a in results:
+                st.write(f"{a.name} | {a.drug_class} | {a.spectrum}")
+        else:
+            st.warning("No antibiotics found with that name.")
+
+    st.markdown("---")
+
+    # --- Filter by Spectrum ---
+    filter_spectrum = st.selectbox("Filter by Spectrum", ["All", "Broad", "Narrow"])
+    filtered = st.session_state.antibiotics
+    if filter_spectrum != "All":
+        filtered = [a for a in st.session_state.antibiotics if a.spectrum == filter_spectrum]
+
+    st.write(f"**Filtered Antibiotics ({filter_spectrum}):**")
+    for a in filtered:
+        st.write(f"{a.name} | {a.drug_class} | {a.spectrum}")
+
+    st.markdown("---")
+
+    # --- Sort ---
+    sort_option = st.radio("Sort Alphabetically?", ["No", "Yes"])
+    display_list = filtered
+    if sort_option == "Yes":
+        display_list = sorted(filtered, key=lambda x: x.name)
+
+    st.write("**Sorted List:**")
+    for a in display_list:
+        st.write(f"{a.name} | {a.drug_class} | {a.spectrum}")
