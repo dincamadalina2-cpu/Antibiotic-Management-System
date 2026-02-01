@@ -1,5 +1,7 @@
 # Antibiotic Management System - Iteration 1
-
+#
+# class
+#
 # class Antibiotic:
 #     def __init__(self, name, drug_class, spectrum):
 #         self.name = name
@@ -17,14 +19,19 @@
 # ]
 #
 #
+# # Display menu
 # def display_menu():
 #     print("\n--- Antibiotic Management System ---")
 #     print("1. Search antibiotic by name")
 #     print("2. Filter antibiotics by spectrum")
 #     print("3. Sort antibiotics alphabetically")
-#     print("4. Exit")
+#     print("4. Add new antibiotic")
+#     print("5. Update antibiotic")
+#     print("6. Delete antibiotic")
+#     print("7. Exit")
 #
 #
+# # Search function
 # def search_antibiotic(name, antibiotics_list):
 #     found = False
 #     for a in antibiotics_list:
@@ -37,6 +44,7 @@
 #         print("Antibiotic not found")
 #
 #
+# # Filter function
 # def filter_by_spectrum(spectrum, antibiotics_list):
 #     print("\nAntibiotics with", spectrum, "spectrum:")
 #     for a in antibiotics_list:
@@ -44,6 +52,7 @@
 #             print(a.name)
 #
 #
+# # Sort function
 # def sort_antibiotics(antibiotics_list):
 #     sorted_list = sorted(antibiotics_list, key=lambda x: x.name)
 #     print("\nAntibiotics sorted alphabetically:")
@@ -51,6 +60,43 @@
 #         print(a.name, "-", a.drug_class, "-", a.spectrum)
 #
 #
+#  #Create function
+# def add_antibiotic(antibiotics_list):
+#     name = input("Enter antibiotic name: ")
+#     drug_class = input("Enter drug class: ")
+#     spectrum = input("Enter spectrum (Broad/Narrow): ")
+#
+#     new_antibiotic = Antibiotic(name, drug_class, spectrum)
+#     antibiotics_list.append(new_antibiotic)
+#
+#     print("Antibiotic added successfully.")
+#
+# #Update function
+# def update_antibiotic(name, antibiotics_list):
+#     for a in antibiotics_list:
+#         if a.name.lower() == name.lower():
+#             print("Enter new details.")
+#
+#             a.drug_class = input("New drug class: ")
+#             a.spectrum = input("New spectrum (Broad/Narrow): ")
+#
+#             print("Antibiotic updated successfully.")
+#             return
+#
+#     print("Antibiotic not found.")
+#
+#
+#  #Delete function
+# def delete_antibiotic(name, antibiotics_list):
+#     for a in antibiotics_list:
+#         if a.name.lower() == name.lower():
+#             antibiotics_list.remove(a)
+#             print("Antibiotic deleted successfully.")
+#             return
+#
+#     print("Antibiotic not found.")
+#
+# # Main loop
 # running = True
 # while running:
 #     display_menu()
@@ -68,124 +114,15 @@
 #         sort_antibiotics(antibiotics)
 #
 #     elif option == "4":
-#         running = False
-#         print("Exiting program...")
-#
-#     else:
-#         print("Invalid option. Try again.")
-
-# ---------------------------------------------------------- #
-# Antibiotic Management System - Iteration 2 (CRUD)
-
-# class Antibiotic:
-#     def __init__(self, name, drug_class, spectrum):
-#         self.name = name
-#         self.drug_class = drug_class
-#         self.spectrum = spectrum
-#
-#
-# # Initial list (from Iteration 1)
-# antibiotics = [
-#     Antibiotic("Amoxicillin", "Penicillin", "Broad"),
-#     Antibiotic("Ciprofloxacin", "Fluoroquinolone", "Broad"),
-#     Antibiotic("Vancomycin", "Glycopeptide", "Narrow"),
-# ]
-#
-#
-# def display_menu():
-#     print("\n--- Antibiotic Management System ---")
-#     print("1. Add new antibiotic")
-#     print("2. View all antibiotics")
-#     print("3. Search antibiotic by name")
-#     print("4. Update antibiotic")
-#     print("5. Delete antibiotic")
-#     print("6. Sort antibiotics alphabetically")
-#     print("7. Exit")
-#
-#
-# # CREATE
-# def add_antibiotic(antibiotics_list):
-#     name = input("Enter antibiotic name: ")
-#     drug_class = input("Enter drug class: ")
-#     spectrum = input("Enter spectrum (Broad/Narrow): ")
-#
-#     antibiotics_list.append(Antibiotic(name, drug_class, spectrum))
-#     print("Antibiotic added successfully!")
-#
-#
-# # READ
-# def view_antibiotics(antibiotics_list):
-#     if len(antibiotics_list) == 0:
-#         print("No antibiotics available.")
-#         return
-#
-#     for a in antibiotics_list:
-#         print(a.name, "-", a.drug_class, "-", a.spectrum)
-#
-#
-# def search_antibiotic(name, antibiotics_list):
-#     for a in antibiotics_list:
-#         if a.name.lower() == name.lower():
-#             print("Found:", a.name, "-", a.drug_class, "-", a.spectrum)
-#             return
-#     print("Antibiotic not found")
-#
-#
-# # UPDATE
-# def update_antibiotic(name, antibiotics_list):
-#     for a in antibiotics_list:
-#         if a.name.lower() == name.lower():
-#             print("Enter new details:")
-#             a.drug_class = input("New drug class: ")
-#             a.spectrum = input("New spectrum (Broad/Narrow): ")
-#             print("Antibiotic updated successfully!")
-#             return
-#     print("Antibiotic not found")
-#
-#
-# # DELETE
-# def delete_antibiotic(name, antibiotics_list):
-#     for a in antibiotics_list:
-#         if a.name.lower() == name.lower():
-#             antibiotics_list.remove(a)
-#             print("Antibiotic deleted successfully!")
-#             return
-#     print("Antibiotic not found")
-#
-#
-# # SORT
-# def sort_antibiotics(antibiotics_list):
-#     sorted_list = sorted(antibiotics_list, key=lambda x: x.name)
-#     for a in sorted_list:
-#         print(a.name, "-", a.drug_class, "-", a.spectrum)
-#
-#
-# # Main program loop
-# running = True
-# while running:
-#     display_menu()
-#     option = input("Choose option: ")
-#
-#     if option == "1":
 #         add_antibiotic(antibiotics)
 #
-#     elif option == "2":
-#         view_antibiotics(antibiotics)
-#
-#     elif option == "3":
-#         name = input("Enter antibiotic name: ")
-#         search_antibiotic(name, antibiotics)
-#
-#     elif option == "4":
+#     elif option == "5":
 #         name = input("Enter antibiotic name to update: ")
 #         update_antibiotic(name, antibiotics)
 #
-#     elif option == "5":
+#     elif option == "6":
 #         name = input("Enter antibiotic name to delete: ")
 #         delete_antibiotic(name, antibiotics)
-#
-#     elif option == "6":
-#         sort_antibiotics(antibiotics)
 #
 #     elif option == "7":
 #         running = False
@@ -193,7 +130,9 @@
 #
 #     else:
 #         print("Invalid option. Try again.")
-
+#
+#
+#
 # ---------------------------------------------------------- #
 
 # Antibiotic Management System - Iteration 3 (Streamlit GUI)
